@@ -1,0 +1,6 @@
+dist
+node_modules
+coverage
+.vercel
+package-lock.json
+*.min.js

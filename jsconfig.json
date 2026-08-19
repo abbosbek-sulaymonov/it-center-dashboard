@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "checkJs": false,
     "paths": {
-      "@/*": ["./src/*"],
-      "@api/*": ["./api/*"],
-      "@server/*": ["./server/*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "api", "server", "src/entry-client.jsx"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }

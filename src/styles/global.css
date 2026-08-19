@@ -1,0 +1,143 @@
+:root {
+  --surface-muted: #f1f5f9;
+  --text-muted: #64748b;
+  --page-max-width: 1200px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+/* ---------- Public shell ---------- */
+
+.public-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-inline: 24px;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: inherit;
+  white-space: nowrap;
+}
+
+.brand:hover {
+  color: inherit;
+}
+
+/* The nav flexes so the auth buttons stay pinned to the right edge. */
+.public-nav {
+  flex: 1;
+  min-width: 0;
+  border-bottom: none;
+  background: transparent;
+}
+
+.public-content {
+  max-width: var(--page-max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+.page-container {
+  width: 100%;
+}
+
+/* ---------- Landing ---------- */
+
+.landing .hero {
+  text-align: center;
+  padding: 56px 16px 48px;
+}
+
+.landing .hero-text {
+  max-width: 640px;
+  margin: 0 auto 24px;
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+/* ---------- Auth screens ---------- */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ---------- Dashboard shell ---------- */
+
+.sider-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  margin: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.sider-brand:hover {
+  color: #fff;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 16px;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dashboard-content {
+  padding: 24px;
+  overflow-x: auto;
+}
+
+@media (max-width: 575px) {
+  .public-nav,
+  .dashboard-username {
+    display: none;
+  }
+
+  .public-content,
+  .dashboard-content {
+    padding-inline: 16px;
+  }
+}

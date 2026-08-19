@@ -1,36 +1,33 @@
-// /server/routes/index.js
+import { Router } from 'express';
 
-import express from 'express';
-import { readFileSync } from 'fs';
-import path from 'path';
+import authRoutes from './auth.routes.js';
+import bookRoutes from './book.routes.js';
+import courseRoutes from './course.routes.js';
+import enrollmentRoutes from './enrollment.routes.js';
+import statsRoutes from './stats.routes.js';
+import studentRoutes from './student.routes.js';
+import tutorRoutes from './tutor.routes.js';
 
-// Import and use API routes
-// import loginHandler from '@/api/auth/login.js';
-// import signupHandler from '@/api/auth/signup.js';
-// import meHandler from '@/api/auth/me.js';
-// import logoutHandler from '@/api/auth/logout.js';
+const router = Router();
 
-// process.cwd() har doim proyekt root'ini qaytaradi
-const packageJson = JSON.parse(readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
-
-const router = express.Router();
-
-// router.post('/auth/login', loginHandler);
-// router.post('/auth/signup', signupHandler);
-// router.post('/auth/me', meHandler);
-// router.post('/auth/logout', logoutHandler);
-
-router.get('/', (req, res) => {
+/** Discovery document, handy when poking the API by hand. */
+router.get('/', (_req, res) => {
   res.json({
-    version: packageJson.version,
-    apiVersion: `v${packageJson.version.split('.')[0]}`,
-    endpoints: {
-      auth: `/api/v${packageJson.version.split('.')[0]}/auth`,
-      tutors: `/api/v${packageJson.version.split('.')[0]}/tutors`,
-      interviews: `/api/v${packageJson.version.split('.')[0]}/interviews`,
-      users: `/api/v${packageJson.version.split('.')[0]}/users`,
+    success: true,
+    data: {
+      name: 'IT Center API',
+      version: 'v1',
+      resources: ['auth', 'courses', 'books', 'tutors', 'students', 'enrollments', 'stats'],
     },
   });
 });
+
+router.use('/auth', authRoutes);
+router.use('/courses', courseRoutes);
+router.use('/books', bookRoutes);
+router.use('/tutors', tutorRoutes);
+router.use('/students', studentRoutes);
+router.use('/enrollments', enrollmentRoutes);
+router.use('/stats', statsRoutes);
 
 export default router;

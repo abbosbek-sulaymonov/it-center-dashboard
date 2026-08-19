@@ -1,66 +1,37 @@
-import { Route, Routes } from 'react-router-dom';
-import { Suspense } from 'react';
-import { AuthProvider } from './app/context/AuthContext';
-import Dashboard from './app/components/adminPanel/Dashboard';
-import Students from './app/components/adminPanel/Students';
-import Tutors from './app/components/adminPanel/Tutors';
-import Signup from './app/components/Signup';
-import UserDashboard from './app/components/userPanel/UserDashboard';
-import Tutor from './app/components/userPanel/Tutor';
-import Books from './app/components/userPanel/Books';
-import UserLayout from './app/components/userPanel/Layout';
-import Navbar from './app/components/Navbar';
-import Login from './app/components/Login';
-import LandingPage from './app/LandingPage';
-import ProtectedRoute from './app/components/mainComponents/ProtectedRoute';
+import { App as AntApp, ConfigProvider, theme } from 'antd';
+import enUS from 'antd/locale/en_US';
+import uzUZ from 'antd/locale/uz_UZ';
+import { useTranslation } from 'react-i18next';
+import { BrowserRouter } from 'react-router-dom';
 
-function App() {
+import { AuthProvider } from '@/context/AuthContext.jsx';
+import { AppRoutes } from '@/routes/AppRoutes.jsx';
+
+const ANTD_LOCALES = { uz: uzUZ, en: enUS };
+
+const THEME = {
+  algorithm: theme.defaultAlgorithm,
+  token: {
+    colorPrimary: '#1d4ed8',
+    borderRadius: 8,
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+  },
+};
+
+export default function App() {
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage ?? 'uz';
+
   return (
-    <AuthProvider>
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center min-h-screen">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          </div>
-        }
-      >
-        <Routes>
-          {/* Protected User Routes */}
-          <Route
-            path="/user/"
-            element={
-              <ProtectedRoute>
-                <UserLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<UserDashboard />} />
-            <Route path="tutor" element={<Tutor />} />
-            <Route path="library" element={<Books />} />
-          </Route>
-
-          {/* Protected Admin Routes */}
-          <Route
-            path="/admin/"
-            element={
-              <ProtectedRoute requireAdmin>
-                <Navbar />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="tutors" element={<Tutors />} />
-            <Route path="library" element={<Students />} />
-          </Route>
-
-          {/* Public Routes */}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </Suspense>
-    </AuthProvider>
+    <ConfigProvider theme={THEME} locale={ANTD_LOCALES[language] ?? uzUZ}>
+      {/* AntApp supplies the message/modal/notification context the pages use. */}
+      <AntApp>
+        <BrowserRouter>
+          <AuthProvider>
+            <AppRoutes />
+          </AuthProvider>
+        </BrowserRouter>
+      </AntApp>
+    </ConfigProvider>
   );
 }
-
-export { App };
