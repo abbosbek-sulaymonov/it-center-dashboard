@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@api/*": ["./api/*"],
+      "@server/*": ["./server/*"]
+    }
+  },
+  "include": ["src", "api", "server", "src/entry-client.jsx"],
+  "exclude": ["node_modules", "dist"]
+}

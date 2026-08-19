@@ -8,8 +8,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import WestCo from './assets/westco.jpg';
-import axios from 'axios';
 import LandingSearchComp from './components/landing/LandingSearchComp';
+import axiosClient from './lib/axios';
 
 const BASE_URL = 'https://coursesnodejs.herokuapp.com/';
 
@@ -30,7 +30,7 @@ const LandingPage = () => {
   }, []);
 
   const getTutors = () => {
-    axios({
+    axiosClient({
       url: `${BASE_URL}employee/course?limit=10&page=1`,
       method: 'get',
       headers: {
@@ -43,7 +43,7 @@ const LandingPage = () => {
   };
 
   const getBooks = () => {
-    axios({
+    axiosClient({
       method: 'get',
       url: `${BASE_URL}employee/book?limit=10000&page=1`,
       headers: {

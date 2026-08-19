@@ -1,23 +1,26 @@
 {
-  "name": "second-lesson",
+  "name": "it-center-dashboard",
   "private": true,
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "nodemon server",
+    "dev": "vite",
+    "dev:server": "nodemon server.js",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:server\"",
     "build": "vite build",
-    "vite:preview": "vite preview",
-    "preview": "node server.js"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "antd": "^4.20.2",
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
     "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^9.0.0",
     "nodemon": "^3.1.11",
     "path": "^0.12.7",
@@ -35,6 +38,11 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^1.3.0",
+    "concurrently": "^9.2.1",
     "vite": "^2.9.5"
+  },
+  "imports": {
+    "#server/*": "./server/*",
+    "#api/*": "./api/*"
   }
 }
